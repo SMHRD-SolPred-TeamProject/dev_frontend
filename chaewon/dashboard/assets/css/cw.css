@@ -46,6 +46,16 @@
   background: #f1f7ff;
 }
 
+/* 실시간발전량, 예측률 뭐 그런거 있는 네모네모 박스들 */
+.card-a {
+  width: 300px;
+}
+
+/* 날씨 */
+.weather {
+  float: right;
+}
+
 /* 실시간발전량 그래프 */
 .AOD {
   width: 4500px;
