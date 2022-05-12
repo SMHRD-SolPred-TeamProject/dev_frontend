@@ -274,8 +274,15 @@
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="text-end pt-1">
-                <h4 class="text-sm mb-0 text-capitalize ScoreDream600">now weather</h4>
-                <h3 id="realtimeAOD" class="mb-0 ScoreDream500">여기에 날씨 api받아와야합니다! 현!재!날!씨!</h3>
+                <h6 class="text-m mb-0 text-capitalize ScoreDream600">now weather</h6>
+                <div class="weather">
+                  <div class="CurrIcon">
+                    <img class="CurrIcon" src="" alt="">
+                  </div>
+                  <h3 class="CurrTemp ScoreDream600"></h3>
+                  <h6 class="City ScoreDream600"></h6>
+                </div>
+
               </div>
             </div>
             <div class="card-footer p-3">
@@ -434,253 +441,311 @@
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
   <script src="/assets/js/todayDashboard.js"></script>
+  <script src="/assets/js/core/weather.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 
   <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
-        },],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+    $(document).ready(function () {
+
+      $.ajax({
+        url: "http://api.openweathermap.org/data/2.5/weather?q=Gumi&appid=b33f6dac8f31aae2893ad33278ed55f5&units=metric",
+        dataType: "json",
+        type: "GET",
+        success: function (data) {
+          var $Icon = (data.weather[0]['icon']);
+          var $Temp = Math.floor(data.main.temp) + "°C";
+          var $city = data.name;
+
+          //$(".CurrIcon").append("http://openweathermap.org/img/wn/" + $Icon + "@2x.png");
+          $(".CurrIcon").attr("src", `http://openweathermap.org/img/wn/${$Icon}@2x.png`)
+
+          $(".CurrTemp").prepend($Temp);
+          $(".City").append($city);
+        }, error: function () {
+          alert("error")
+        }
+      })
+    })
+
+    // if (weatherObj.getString("main").equals("Thunderstorm")) {
+    //   weather = "번개";
+    //   imgWeather.setImageResource(R.drawable.ic_storm);
+    // } else if (weatherObj.getString("main").equals("Drizzle")) {
+    //   weather = "이슬비";
+    //   imgWeather.setImageResource(R.drawable.ic_drizzel);
+    // } else if (weatherObj.getString("main").equals("Rain")) {
+    //   weather = "비";
+    //   imgWeather.setImageResource(R.drawable.ic_rain);
+    // } else if (weatherObj.getString("main").equals("Snow")) {
+    //   weather = "눈";
+    //   imgWeather.setImageResource(R.drawable.ic_snow);
+    // } else if (weatherObj.getString("main").equals("Atmosphere")) {
+    //   weather = "안개";
+    //   imgWeather.setImageResource(R.drawable.ic_fog);
+    // } else if (weatherObj.getString("main").equals("Clear")) {
+    //   weather = "맑음";
+    //   imgWeather.setImageResource(R.drawable.ic_clear);
+    // } else if (weatherObj.getString("main").equals("Clouds")) {
+    //   weather = "구름";
+    //   imgWeather.setImageResource(R.drawable.ic_cloud);
+    // }
 
 
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
+    //                 JSONObject tempk = new JSONObject(obj.getString("main"));
+    //                 double tempDo = (Math.round((tempk.getDouble("temp") - 273.15) * 100) / 100.0);
 
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-          maxBarThickness: 6
+    //                 JSONObject wind = new JSONObject(obj.getString("wind"));
+    //                 double windSpeed = wind.getDouble("speed");
 
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+    // var ctx = document.getElementById("chart-bars").getContext("2d");
 
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+    // new Chart(ctx, {
+    //   type: "bar",
+    //   data: {
+    //     labels: ["M", "T", "W", "T", "F", "S", "S"],
+    //     datasets: [{
+    //       label: "Sales",
+    //       tension: 0.4,
+    //       borderWidth: 0,
+    //       borderRadius: 4,
+    //       borderSkipped: false,
+    //       backgroundColor: "rgba(255, 255, 255, .8)",
+    //       data: [50, 20, 10, 22, 50, 10, 40],
+    //       maxBarThickness: 6
+    //     },],
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     plugins: {
+    //       legend: {
+    //         display: false,
+    //       }
+    //     },
+    //     interaction: {
+    //       intersect: false,
+    //       mode: 'index',
+    //     },
+    //     scales: {
+    //       y: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: true,
+    //           drawOnChartArea: true,
+    //           drawTicks: false,
+    //           borderDash: [5, 5],
+    //           color: 'rgba(255, 255, 255, .2)'
+    //         },
+    //         ticks: {
+    //           suggestedMin: 0,
+    //           suggestedMax: 500,
+    //           beginAtZero: true,
+    //           padding: 10,
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //           color: "#fff"
+    //         },
+    //       },
+    //       x: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: true,
+    //           drawOnChartArea: true,
+    //           drawTicks: false,
+    //           borderDash: [5, 5],
+    //           color: 'rgba(255, 255, 255, .2)'
+    //         },
+    //         ticks: {
+    //           display: true,
+    //           color: '#f8f9fa',
+    //           padding: 10,
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //         }
+    //       },
+    //     },
+    //   },
+    // });
 
-    new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
 
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+    // var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    // new Chart(ctx2, {
+    //   type: "line",
+    //   data: {
+    //     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    //     datasets: [{
+    //       label: "Mobile apps",
+    //       tension: 0,
+    //       borderWidth: 0,
+    //       pointRadius: 5,
+    //       pointBackgroundColor: "rgba(255, 255, 255, .8)",
+    //       pointBorderColor: "transparent",
+    //       borderColor: "rgba(255, 255, 255, .8)",
+    //       borderColor: "rgba(255, 255, 255, .8)",
+    //       borderWidth: 4,
+    //       backgroundColor: "transparent",
+    //       fill: true,
+    //       data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+    //       maxBarThickness: 6
+
+    //     }],
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     plugins: {
+    //       legend: {
+    //         display: false,
+    //       }
+    //     },
+    //     interaction: {
+    //       intersect: false,
+    //       mode: 'index',
+    //     },
+    //     scales: {
+    //       y: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: true,
+    //           drawOnChartArea: true,
+    //           drawTicks: false,
+    //           borderDash: [5, 5],
+    //           color: 'rgba(255, 255, 255, .2)'
+    //         },
+    //         ticks: {
+    //           display: true,
+    //           color: '#f8f9fa',
+    //           padding: 10,
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //         }
+    //       },
+    //       x: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: false,
+    //           drawOnChartArea: false,
+    //           drawTicks: false,
+    //           borderDash: [5, 5]
+    //         },
+    //         ticks: {
+    //           display: true,
+    //           color: '#f8f9fa',
+    //           padding: 10,
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //         }
+    //       },
+    //     },
+    //   },
+    // });
+
+    // var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    // new Chart(ctx3, {
+    //   type: "line",
+    //   data: {
+    //     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    //     datasets: [{
+    //       label: "Mobile apps",
+    //       tension: 0,
+    //       borderWidth: 0,
+    //       pointRadius: 5,
+    //       pointBackgroundColor: "rgba(255, 255, 255, .8)",
+    //       pointBorderColor: "transparent",
+    //       borderColor: "rgba(255, 255, 255, .8)",
+    //       borderWidth: 4,
+    //       backgroundColor: "transparent",
+    //       fill: true,
+    //       data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+    //       maxBarThickness: 6
+
+    //     }],
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     maintainAspectRatio: false,
+    //     plugins: {
+    //       legend: {
+    //         display: false,
+    //       }
+    //     },
+    //     interaction: {
+    //       intersect: false,
+    //       mode: 'index',
+    //     },
+    //     scales: {
+    //       y: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: true,
+    //           drawOnChartArea: true,
+    //           drawTicks: false,
+    //           borderDash: [5, 5],
+    //           color: 'rgba(255, 255, 255, .2)'
+    //         },
+    //         ticks: {
+    //           display: true,
+    //           padding: 10,
+    //           color: '#f8f9fa',
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //         }
+    //       },
+    //       x: {
+    //         grid: {
+    //           drawBorder: false,
+    //           display: false,
+    //           drawOnChartArea: false,
+    //           drawTicks: false,
+    //           borderDash: [5, 5]
+    //         },
+    //         ticks: {
+    //           display: true,
+    //           color: '#f8f9fa',
+    //           padding: 10,
+    //           font: {
+    //             size: 14,
+    //             weight: 300,
+    //             family: "Roboto",
+    //             style: 'normal',
+    //             lineHeight: 2
+    //           },
+    //         }
+    //       },
+    //     },
+    //   },
+    // });
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

@@ -58,6 +58,16 @@
   float: right;
 }
 
+.CurrIcon,
+.CurrTemp,
+.City {
+  display: inline-block;
+}
+
+.City {
+  margin-left: 80px;
+}
+
 /* 실시간발전량 그래프 */
 .AOD {
   width: 4500px;
@@ -77,10 +87,6 @@
 
 .bg-gradient-success {
   text-align: center;
-}
-
-.card-b {
-  width: 450px;
 }
 
 /* solution 페이지 -> 글씨타이핑효과*/
