@@ -6,7 +6,9 @@
 }
 
 #container,
-#container2 {
+#container2,
+#predContainer,
+#predContainer2 {
   height: 500px;
 }
 
@@ -59,4 +61,41 @@
 /* 실시간발전량 그래프 */
 .AOD {
   width: 4500px;
+}
+
+/* solution 페이지 */
+.solution-img {
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  -khtml-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+.width80 {
+  width: 80%;
+}
+
+.bg-gradient-success {
+  text-align: center;
+}
+
+.card-b {
+  width: 450px;
+}
+
+/* solution 페이지 -> 글씨타이핑효과*/
+.text_box {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.blink {
+  animation: blink 0.5s infinite;
+  font-size: 2.5rem;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
 }
