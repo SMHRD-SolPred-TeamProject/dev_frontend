@@ -1,4 +1,4 @@
-const content = "ㅤNCT DREAM 앨범을 사보는 건 어떨까요?";
+const content = "ㅤNCT DREAM 앨범을 사보는 건 어떨까요?🎧ㅤ";
 const text = document.querySelector(".text");
 let i = 0;
 
@@ -9,4 +9,4 @@ function typing() {
     i++;
   }
 }
-setInterval(typing, 150);
+setInterval(typing, 200);
