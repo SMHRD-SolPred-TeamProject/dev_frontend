@@ -1,4 +1,5 @@
 let realTimeGerateDom = document.getElementById("realtimeAOD");
+let integratedAOD = document.getElementById("integratedAOD");
 
 Highcharts.chart("container", {
   chart: {
@@ -108,7 +109,7 @@ Highcharts.chart("container2", {
           let y = Math.random() * 3000;
 
           // 10초 단위로 바꿈!
-          realTimeGerateDom.innerText = y;
+          integratedAOD.innerText = y;
           series.addPoint([x, y], true, true);
         }, 10000);
       },

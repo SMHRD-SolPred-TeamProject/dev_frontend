@@ -50,7 +50,27 @@
 
 /* 실시간발전량, 예측률 뭐 그런거 있는 네모네모 박스들 */
 .card-a {
+  width: 250px;
+}
+
+.card-b {
   width: 300px;
+}
+
+.card-c {
+  width: 350px;
+}
+
+.marginleft15 {
+  margin-left: 15px;
+}
+
+.floatright {
+  float: right;
+}
+
+.inline {
+  display: inline;
 }
 
 /* 날씨 */
@@ -59,18 +79,31 @@
 }
 
 .CurrIcon,
-.CurrTemp,
-.City {
+.CurrTemp {
   display: inline-block;
 }
 
 .City {
   margin-left: 80px;
+  font-size: 1.5em;
+}
+
+.CurrIcon {
+  width: 120px;
+  height: 120px;
+}
+
+.placeright {
+  text-align: right !important;
 }
 
 /* 실시간발전량 그래프 */
 .AOD {
   width: 4500px;
+}
+
+.marginbottom80 {
+  margin-bottom: 80px;
 }
 
 /* solution 페이지 */
