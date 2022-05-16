@@ -43,8 +43,9 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  /**background: linear-gradient(to left, #ff9124, #ffb41d);**/
-  border-radius: 5px;
+  background: linear-gradient(to left, #ff9124, #ffb41d);
+  opacity: 65%;
+  border-radius: 10px;
   transition: 0.5s;
 }
 .social-icons {
@@ -93,11 +94,13 @@ span {
 }
 .badge {
   text-align: center;
+  font-size: larger;
 }
 
-.width50 {
-  width: 50%;
+.width35 {
+  width: 35%;
 }
+
 #login {
   left: 40px;
   text-align: center;
