@@ -94,13 +94,14 @@ span {
 }
 .badge {
   text-align: center;
-  font-size: larger;
+  font-size: x-large;
+  color: #323232;
 }
 
 .width35 {
   width: 35%;
+  color: #191919;
 }
-
 #login {
   left: 40px;
   text-align: center;
